@@ -54,13 +54,9 @@
     mounted() {
       const socket = io('http://localhost:3001/users');
 
-    socket.on('connect', () => {
-      console.log('Connected to the server');
-    });
-
-    socket.on('display', employees => {
-      this.employees = employees
-    });
+      socket.on('display', employees => {
+        this.employees = employees
+      });
     },
 
     methods: {

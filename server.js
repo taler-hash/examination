@@ -3,7 +3,6 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
 const router = require('./routes/start.js')
 const port = process.env.APP_PORT
 
