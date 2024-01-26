@@ -1,0 +1,81 @@
+<%- include('./head'); %>
+<body>
+  <main id="app">
+    <div class="relative w-full h-screen">
+      <!-- Wrapper -->
+      <div class="w-full h-full grid place-items-center">
+        <!-- Content -->
+        <div class="border font-light">
+          <!-- Body -->
+          <div class="">
+            <table >
+              <thead>
+                <tr >
+                  <th class="font-light text-lg p-4">#</th>
+                  <th class="font-light text-lg p-4">First Name</th>
+                  <th class="font-light text-lg p-4">Last Name</th>
+                  <th class="font-light text-lg p-4">Position</th>
+                  <th class="font-light text-lg p-4">Created At</th>
+                  <th class="font-light text-lg p-4">
+                    <button class="bg-green-500 text-white p-2 px-4 text-sm">Add</button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="employee in employees">
+                  <td class="p-4">{{ employee.id }}</td>
+                  <td class="p-4">{{ employee.first_name }}</td>
+                  <td class="p-4">{{ employee.last_name }}</td>
+                  <td class="p-4">{{ employee.position }}</td>
+                  <td class="p-4">{{ transformDate(employee.created_at) }}</td>
+                  <td class="p-4 grid grid-cols-1">
+                    <button class="bg-yellow-500 text-white p-2 px-4 text-sm">Edit</button>
+                    <button @click="handleDelete(employee.id)" class="bg-red-500 text-white p-2 px-4 text-sm">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+<script type="module">
+  import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+  createApp({
+    data() {
+      return {
+        employees: []
+      }
+    },
+
+    mounted() {
+      const socket = io('http://localhost:3001/users');
+
+    socket.on('connect', () => {
+      console.log('Connected to the server');
+    });
+
+    socket.on('display', employees => {
+      this.employees = employees
+    });
+    },
+
+    methods: {
+      transformDate(date) {
+        const d = new Date(date)
+        let formattedDate = d.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+        return formattedDate
+      },
+
+      handleDelete(id) {
+        axios.post('/api/user/delete', {id: id})
+      }
+    }
+  }).mount('#app')
+</script>
+</body>
+</html>

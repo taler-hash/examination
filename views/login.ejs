@@ -1,0 +1,68 @@
+<%- include('./head'); %>
+<body>
+  <main id="app">
+    <div v-cloak class="w-full h-screen">
+      <!-- Wrapper -->
+      <div class="w-full h-full grid place-items-center">
+        <!-- Modal -->
+        <div class="w-96 space-y-2">
+          <div v-if="error" class="w-full p-2 bg-rose-500/[.15] border border-rose-500 text-rose-700 font-bold rounded-sm">
+            {{ error }}
+          </div>
+          <div class="w-full border font-light">
+          <!-- Header -->
+          <div class="text-xl p-4 bg-white w-full">
+            Login
+          </div>
+          <!-- Body -->
+          <div class="p-4 bg-gray-50/50 space-y-3 text-lg">
+            <div class="">
+              <p class="pb-2">Username</p>
+              <input v-model="data.username" type="text" class="p-1 border w-full">
+            </div>
+            <div class="">
+              <p class="pb-2">Password</p>
+              <input v-model="data.password" type="password" class="p-1 border w-full">
+            </div>
+            <!-- Button -->
+            <div class="flex justify-center">
+              <button :disabled="!data.username || !data.password" @click="handleLogin()" class="p-3 px-6 bg-blue-600/75 text-white font-[500] rounded-sm disabled:bg-blue-200">Login</button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+<script type="module">
+  import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+  createApp({
+    data() {
+      return {
+        data: {
+          username: null,
+          password: null
+        },
+        error: null
+      }
+    },
+
+    methods: {
+      async handleLogin() {
+        try {
+          const res = await axios.post('/api/login', this.data)
+
+          window.location.href = '/users'
+        } catch (err) {
+          if (err.response.status === 422) {
+            this.error = err.response.data.message
+          }
+        }
+      }
+    }
+  }).mount('#app')
+</script>
+</body>
+</html>
