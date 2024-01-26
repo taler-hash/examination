@@ -7,7 +7,7 @@ const authCheck = function (req, res, next) {
     jwt.verify(token, process.env.JWT_SECRET_KEY)
     next()
   } catch (err) {
-    res.status(401).redirect('login')
+    res.status(401).redirect('http://localhost:3000/login')
     return 
   }
 } 

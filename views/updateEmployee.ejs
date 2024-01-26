@@ -1,6 +1,6 @@
 <%- include('./head'); %>
-<body>
-  <main id="app">
+<body >
+  <main id="app" v-cloak>
     <div class="w-full h-screen">
       <!-- Wrapper -->
       <div class="w-full h-full grid place-items-center ">
@@ -30,7 +30,7 @@
                 </select>
               </div>
               <div class="flex justify-end pt-4">
-                <button @click="handleAdd()" :disabled="!data.first_name || !data.last_name || data.position === ''" class="px-5 py-3 text-white bg-green-500 text-lg disabled:bg-green-200">Save</button>
+                <button @click="handleUpdate()" :disabled="!data.first_name || !data.last_name || data.position === ''" class="px-5 py-3 text-white bg-green-500 text-lg disabled:bg-green-200">Save</button>
               </div>
           </div>
         </div>
@@ -45,17 +45,19 @@
     data() {
       return {
         data: {
-          first_name: null,
-          last_name: null,
-          position: '',
+          id: '<%- employee.id %>',
+          first_name: '<%- employee.first_name %>',
+          last_name: '<%- employee.last_name %>',
+          position: '<%- employee.position %>',
         }
       }
     },
 
     methods: {
-      handleAdd() {
+      handleUpdate() {
+        console.log('add')
         try {
-          axios.post('/api/employee/add', this.data)
+          axios.post('/api/employee/update', this.data)
 
           window.location.href = '/employees'
         } catch (err) {

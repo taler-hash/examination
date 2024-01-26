@@ -29,7 +29,7 @@
                   <td class="p-4">{{ employee.position }}</td>
                   <td class="p-4">{{ transformDate(employee.created_at) }}</td>
                   <td class="p-4 grid grid-cols-1">
-                    <button class="bg-yellow-500 text-white p-2 px-4 text-sm">Edit</button>
+                    <button @click="handleRedirectUpdate(employee.id)" class="bg-yellow-500 text-white p-2 px-4 text-sm">Edit</button>
                     <button @click="handleDelete(employee.id)" class="bg-red-500 text-white p-2 px-4 text-sm">Delete</button>
                   </td>
                 </tr>
@@ -72,7 +72,15 @@
       },
 
       handleDelete(id) {
-        axios.post('/api/user/delete', {id: id})
+        axios.post('/api/employee/delete', {id: id})
+      },
+
+      handleRedirectAdd() {
+        window.location.href = '/employee/add'
+      },
+
+      handleRedirectUpdate(id) {
+        window.location.href = `/employee/update/${id}`
       }
     }
   }).mount('#app')

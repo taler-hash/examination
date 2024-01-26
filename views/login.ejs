@@ -54,7 +54,7 @@
         try {
           const res = await axios.post('/api/login', this.data)
 
-          window.location.href = '/users'
+          window.location.href = '/employees'
         } catch (err) {
           if (err.response.status === 422) {
             this.error = err.response.data.message
