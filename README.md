@@ -4,4 +4,6 @@
 
 JWT is for the authentication in log in <br />
 
-sql file can be found in db directory
+sql file can be found in db directory <br />
+
+rename exam.env to .env
