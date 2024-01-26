@@ -8,4 +8,8 @@ sql file can be found in db directory <br />
 
 rename exam.env to .env <br />
 
-using only ejs templating with tailwind CSS and Vue.JS cdn 
+using only ejs templating with tailwind CSS and Vue.JS cdn
+
+# Credentials in log in
+user : tylier
+password : test123
