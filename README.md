@@ -19,4 +19,4 @@ password : test123
 
  
 ## Post Script
- - .env db credentials are not used because of the sequelize cli that can create a `config.json` under config directory, since i was using cli to migrate and seed data, but ended up using to importing directlt the sql instead of automating the migration and seeding data .env used variable are `APP_PORT` and `JWT_SECRET_TOKEN`.
+ - .env db credentials are not used because of the sequelize cli that can create a `config.json` under config directory, since i was using cli to migrate and seed data, but ended up using to importing directly the sql instead of automating the migration and seeding data .env used variable are `APP_PORT` and `JWT_SECRET_TOKEN`.
